@@ -14,3 +14,11 @@ export function removeTile(id) {
         id
     }
 }
+
+export function addTileWithChecking(color) {
+    return function(dispatch, getState) {
+        if(getState().grid.length < 5) {
+            dispatch(addTile(color))
+        }
+    }
+}

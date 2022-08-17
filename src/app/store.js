@@ -1,12 +1,16 @@
-import { combineReducers, legacy_createStore as createStore } from "redux";
-
-import gridReducer from '../features/Grid/reducer'
-
+import {
+  combineReducers,
+  legacy_createStore as createStore,
+  applyMiddleware,
+  compose,
+} from "redux";
+import thunk from "redux-thunk";
+import gridReducer from "../features/Grid/reducer";
 
 let rootReducers = combineReducers({
-    grid: gridReducer
-})
+  grid: gridReducer,
+});
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+let store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunk)));
 
-let store = createStore(rootReducers)
-
-export default store
+export default store;
